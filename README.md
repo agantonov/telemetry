@@ -130,7 +130,7 @@
    Add a data source https://grafana.com/docs/grafana/latest/administration/data-source-management/#add-a-data-source
    <img height="789" alt="image" src="https://github.com/agantonov/telemetry/assets/34284048/c1a9dbde-6776-419f-b28e-e9ca46100d63">
 
-   Create a dashboard pulling data from InfluxDB
+   Create a [dashboard](https://github.com/agantonov/telemetry/blob/main/my_dashboard.json) pulling data from InfluxDB
    <img width="1789" alt="image" src="https://github.com/agantonov/telemetry/assets/34284048/78a3028d-dea9-4b3e-96d1-bc7c9992fe59">
 
    Flux Queries:
