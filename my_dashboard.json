@@ -1,0 +1,523 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "liveNow": true,
+  "panels": [
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "d81fbe00-6c27-440b-b2c1-6d2a4655e66d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "pps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "subinterfaces/subinterface/state/counters/in_pkts"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "${__field.labels.name} In"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "subinterfaces/subinterface/state/counters/out_pkts"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "${__field.labels.name} Out"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d81fbe00-6c27-440b-b2c1-6d2a4655e66d"
+          },
+          "query": "from(bucket:\"poc\")\n |> range(start: -1h)\n |> filter(fn: (r) => r.source == \"acx7509-2\" and r.name =~ /ae*/ and r.index == \"0\" and r._field =~ /subinterfaces\\/subinterface\\/state\\/counters\\/(in|out)_pkts/ )\n |> derivative(nonNegative: true)\n |> aggregateWindow(every: v.windowPeriod, createEmpty: false, fn: mean)\n |> yield (name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "ACX7509-2: Packets per seconds",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "d81fbe00-6c27-440b-b2c1-6d2a4655e66d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "pps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "subinterfaces/subinterface/state/counters/in_pkts"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "${__field.labels.name} In"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "subinterfaces/subinterface/state/counters/out_pkts"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "${__field.labels.name} Out"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d81fbe00-6c27-440b-b2c1-6d2a4655e66d"
+          },
+          "query": "from(bucket:\"poc\")\n |> range(start: -1h)\n |> filter(fn: (r) => r.source == \"mx204-83\" and r.index == \"0\" and r.name =~ /^et-*/ and r._field =~ /subinterfaces\\/subinterface\\/state\\/counters\\/(in|out)_pkts/ )\n |> derivative(nonNegative: true)\n |> aggregateWindow(every: v.windowPeriod, createEmpty: false, fn: mean)\n |> yield (name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "MX204-83: Packets per seconds",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "d81fbe00-6c27-440b-b2c1-6d2a4655e66d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "subinterfaces/subinterface/state/counters/in_octets"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "${__field.labels.name} In"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "subinterfaces/subinterface/state/counters/out_octets"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "${__field.labels.name} Out"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d81fbe00-6c27-440b-b2c1-6d2a4655e66d"
+          },
+          "query": "from(bucket:\"poc\")\n |> range(start: -10h)\n |> filter(fn: (r) => r.source == \"acx7509-2\" and r.name =~ /ae*/ and r.index == \"0\" and r._field =~ /subinterfaces\\/subinterface\\/state\\/counters\\/(in|out)_octets/ )\n |> map(fn: (r) => ({r with _value: r._value * 8}))\n |> derivative(nonNegative: true)\n |> aggregateWindow(every: v.windowPeriod, createEmpty: false, fn: mean)\n |> yield (name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "ACX7509-2: Bits per second",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "d81fbe00-6c27-440b-b2c1-6d2a4655e66d"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "bps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "subinterfaces/subinterface/state/counters/in_octets"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "${__field.labels.name} In"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "subinterfaces/subinterface/state/counters/out_octets"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "${__field.labels.name} Out"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 12,
+        "y": 8
+      },
+      "id": 4,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "right",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "d81fbe00-6c27-440b-b2c1-6d2a4655e66d"
+          },
+          "query": "from(bucket:\"poc\")\n |> range(start: -10h)\n |> filter(fn: (r) => r.source == \"mx204-83\" and r.name =~ /et-*/ and r.index == \"0\" and r._field =~ /subinterfaces\\/subinterface\\/state\\/counters\\/(in|out)_octets/ )\n |> map(fn: (r) => ({r with _value: r._value * 8}))\n |> derivative(nonNegative: true)\n |> aggregateWindow(every: v.windowPeriod, createEmpty: false, fn: mean)\n |> yield (name: \"mean\")",
+          "refId": "A"
+        }
+      ],
+      "title": "MX204-83: Bits per second",
+      "type": "timeseries"
+    }
+  ],
+  "refresh": "10s",
+  "schemaVersion": 38,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "My Dashboard",
+  "uid": "d3aa5b85-c4ae-4cb3-b159-f967084532ee",
+  "version": 11,
+  "weekStart": ""
+}
