@@ -484,7 +484,7 @@ The installation of the software on Ubuntu is quite straightforward and well-doc
     |> aggregateWindow(every: v.windowPeriod, createEmpty: false, fn: mean)
     |> yield (name: "mean")
    ```
-   MX204-83: PPS
+   MX204-83: BPS
    ```
    from(bucket:"poc")
     |> range(start: -3h)
