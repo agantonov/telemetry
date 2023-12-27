@@ -210,9 +210,9 @@ The installation of the software on Ubuntu is quite straightforward and well-doc
       bucket = "poc"
     [[inputs.gnmi]]
       addresses = ["acx7509-2:32767"]
-       encoding = "proto"
+      encoding = "proto"
       redial = "10s"
-       max_msg_size = "10MB"
+      max_msg_size = "10MB"
       [[inputs.gnmi.subscription]]
            name = "interface-counters"
            origin = "openconfig-interfaces"
@@ -239,9 +239,9 @@ The installation of the software on Ubuntu is quite straightforward and well-doc
            sample_interval = "60s"
     [[inputs.gnmi]]
       addresses = ["mx204-83:32767"]
-       encoding = "proto"
+      encoding = "proto"
       redial = "10s"
-       max_msg_size = "10MB"
+      max_msg_size = "10MB"
       [[inputs.gnmi.subscription]]
            name = "interface-counters"
            origin = "openconfig-interfaces"
@@ -449,7 +449,8 @@ The installation of the software on Ubuntu is quite straightforward and well-doc
       sudo systemctl start grafana-server
       sudo systemctl enable grafana-server.service
       ```
-   * Add a data source https://grafana.com/docs/grafana/latest/administration/data-source-management/#add-a-data-source
+   * Add a [data source](https://grafana.com/docs/grafana/latest/administration/data-source-management/#add-a-data-source):
+     
       <img height="789" alt="image" src="https://github.com/agantonov/telemetry/assets/34284048/c1a9dbde-6776-419f-b28e-e9ca46100d63">
    
    The most challenging part here is creating FLEX requests to InfluxDB for the necessary metrics on our dashboard (especially if you are not familiar with the FLEX query language). I    will focus on visualizing only the IN/OUT packet and bit counters, excluding all metrics under the `/interfaces/interface/state/counters` tree. To accomplish this, I've designed a [dashboard](https://github.com/agantonov/telemetry/blob/main/openconfig_demo_dashboard.json) using the following FLEX queries to the database:
