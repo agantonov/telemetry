@@ -453,7 +453,7 @@ The installation of the software on Ubuntu is quite straightforward and well-doc
      
       <img height="789" alt="image" src="https://github.com/agantonov/telemetry/assets/34284048/c1a9dbde-6776-419f-b28e-e9ca46100d63">
    
-   The most challenging part here is creating FLEX requests to InfluxDB for the necessary metrics on our dashboard (especially if you are not familiar with the FLEX query language). I    will focus on visualizing only the IN/OUT packet and bit counters, excluding all metrics under the `/interfaces/interface/state/counters` tree. To accomplish this, I've designed a [dashboard](https://github.com/agantonov/telemetry/blob/main/openconfig_demo_dashboard.json) using the following FLEX queries to the database:
+   The most challenging part here is creating Flux requests to InfluxDB for the necessary metrics on our dashboard (especially if you are not familiar with the Flux query language). I    will focus on visualizing only the IN/OUT packet and bit counters, excluding all metrics under the `/interfaces/interface/state/counters` tree. To accomplish this, I've designed a [dashboard](https://github.com/agantonov/telemetry/blob/main/openconfig_demo_dashboard.json) using the following Flux queries to the database:
    
    
    ACX7509-2: PPS
