@@ -451,7 +451,7 @@ The installation of the software on Ubuntu is quite straightforward and well-doc
       ```
    * Add a [data source](https://grafana.com/docs/grafana/latest/administration/data-source-management/#add-a-data-source):
      
-      <img height="789" alt="image" src="https://github.com/agantonov/telemetry/assets/34284048/c1a9dbde-6776-419f-b28e-e9ca46100d63">
+      <img height="789" alt="image" src="images/influxdb_datasource.png">
    
    The most challenging part here is creating Flux requests to InfluxDB for the necessary metrics on our dashboard (especially if you are not familiar with the Flux query language). I    will focus on visualizing only the IN/OUT packet and bit counters, excluding all metrics under the `/interfaces/interface/state/counters` tree. To accomplish this, I've designed a [dashboard](https://github.com/agantonov/telemetry/blob/main/openconfig_demo_dashboard.json) using the following Flux queries to the database:
    
@@ -495,7 +495,7 @@ The installation of the software on Ubuntu is quite straightforward and well-doc
     |> yield (name: "mean")
    ```
    This is what it looks like in a browser window:
-   <img width="1791" alt="image" src="https://github.com/agantonov/telemetry/assets/34284048/752053df-2b28-41ac-8b9e-ca8899a3b9ee">
+   <img width="1791" alt="image" src="images/openconfig_demo_dashboard.png">
 
 
 Thus, we have illustrated how OpenConfig telemetry can be easily implemented in the network, providing a flexible vendor-agnostic approach to real-time monitoring. All tools are ready to use.
